@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.foregroundservice.BroadcastReceiver;
+package com.prasannakumar.SleepTime.BroadcastReceiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -26,8 +26,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.truiton.foregroundservice.Database.DatabaseHelper;
-import com.truiton.foregroundservice.Global.GlobalApplication;
+import com.prasannakumar.SleepTime.Database.DatabaseHelper;
+import com.prasannakumar.SleepTime.Global.GlobalApplication;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,26 +42,27 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class UserPresentBroadcastReceiver extends BroadcastReceiver {
+    private static String TAG=UserPresentBroadcastReceiver.class.getSimpleName();
     private DatabaseHelper db;
     public UserPresentBroadcastReceiver() {
     }
     @Override
     public void onReceive(Context context, Intent intent) {
         SharedPreferences sharedpreferences = null;
-        Log.d("TAG1","Intent got::"+intent.getAction());
+        Log.d(TAG,"Intent got::"+intent.getAction());
        if(intent.getAction().equals(Intent.ACTION_USER_UNLOCKED))
         {
-            Log.d("TAG1","Intent got::True");
+            Log.d(TAG,"Intent got::True");
         }
         if(intent.getAction().equals(Intent.ACTION_USER_PRESENT)){
             if(GlobalApplication.isServiceOn)
             {
                 try {
-                    Log.e("TAG1","Unlocked");
+                    Log.e(TAG,"Unlocked");
                     // Date currentTime = Calendar.getInstance().getTime();
                     Calendar c = Calendar.getInstance();
                     String unlockDate=FormatDate(c);
-                    Log.e("TAG1","Unlocked Time::"+unlockDate);
+                    Log.e(TAG,"Unlocked Time::"+unlockDate);
                     SharedPreferences.Editor editor = context.getSharedPreferences(GlobalApplication.MyPREFERENCES, MODE_PRIVATE).edit();
                     editor.putString(GlobalApplication.mUnlockTime, unlockDate+"");
                     editor.commit();
@@ -77,11 +78,9 @@ public class UserPresentBroadcastReceiver extends BroadcastReceiver {
                         // Date date2 = simpleDateFormat.parse("30/11/2018 17:38:11");
                         SimpleDateFormat df3 = new SimpleDateFormat("dd/M/yyyy HH:mm:ss");
 
-                        Log.e("TAG1","lock Time::"+df3.format(date1));
-                        Log.e("TAG1","unlock Time::"+df3.format(date2));
+                        Log.e(TAG,"lock Time::"+df3.format(date1));
+                        Log.e(TAG,"unlock Time::"+df3.format(date2));
                         printDifference(date1,date2,context);
-                        //  System.out.println(date1);
-                        //  System.out.println(date2);
 
 
                     }
@@ -97,10 +96,10 @@ public class UserPresentBroadcastReceiver extends BroadcastReceiver {
             if(GlobalApplication.isServiceOn)
             {
                 try{
-                    Log.e("TAG1","Locked");
+                    Log.e(TAG,"Locked");
                     Calendar c = Calendar.getInstance();
                     String lockDate=FormatDate(c);
-                    Log.e("TAG1","Locked Time::"+lockDate);
+                    Log.e(TAG,"Locked Time::"+lockDate);
                     SharedPreferences.Editor editor = context.getSharedPreferences(GlobalApplication.MyPREFERENCES, MODE_PRIVATE).edit();
                     editor.putString(GlobalApplication.mLockTime, lockDate+"");
                     editor.commit();
@@ -156,7 +155,7 @@ public class UserPresentBroadcastReceiver extends BroadcastReceiver {
         System.out.printf(
                 "%d days, %d hours, %d minutes, %d seconds%n",
                 elapsedDays, elapsedHours, elapsedMinutes, elapsedSeconds);
-        Log.e("TAG1","Hours and mins::"+sumOfDaysAndHours+":"+elapsedMinutes+":"+elapsedSeconds);
+        Log.e(TAG,"Hours and mins::"+sumOfDaysAndHours+":"+elapsedMinutes+":"+elapsedSeconds);
         db = new DatabaseHelper(con);
 
         CreateNote(db,sumOfDaysAndHours,elapsedMinutes,elapsedSeconds,startDate,endDate,difference);
@@ -174,7 +173,7 @@ public class UserPresentBroadcastReceiver extends BroadcastReceiver {
         int seconds = (int) elapsedSeconds;
         //string lock,String unlock,String timeDiff,int hours,int mins,int seconds
         long id = db.insertNote(mStartDate,mEndDate,difference,hours,mins,seconds,mStartDate_full,mEndDate_full);
-        Log.e("TAG1","ID::"+id);
+        Log.e(TAG,"ID::"+id);
     }
 
 }

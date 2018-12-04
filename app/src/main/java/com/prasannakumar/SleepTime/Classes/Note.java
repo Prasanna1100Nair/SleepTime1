@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.foregroundservice.Classes;
+package com.prasannakumar.SleepTime.Classes;
 
 /**
  * Created by prasannakumar.nair on 27-Nov-18.

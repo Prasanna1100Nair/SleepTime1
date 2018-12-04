@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.foregroundservice;
+package com.prasannakumar.SleepTime;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -31,16 +31,15 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.truiton.foregroundservice.BroadcastReceiver.UserPresentBroadcastReceiver;
-import com.truiton.foregroundservice.Global.GlobalApplication;
+import com.prasannakumar.SleepTime.BroadcastReceiver.UserPresentBroadcastReceiver;
+import com.prasannakumar.SleepTime.Global.GlobalApplication;
 
 public class ForegroundService extends Service {
-    private static final String LOG_TAG = "ForegroundService";
+    private static final String TAG = ForegroundService.class.getSimpleName();
     UserPresentBroadcastReceiver myReceiver;
     Handler handler;
     long  i=0;
@@ -52,7 +51,7 @@ public class ForegroundService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent.getAction().equals(Constants.ACTION.STARTFOREGROUND_ACTION)) {
-            Log.i(LOG_TAG, "Received Start Foreground Intent ");
+            Log.i(TAG, "Received Start Foreground Intent ");
             Intent notificationIntent = new Intent(this, MainActivity.class);
             notificationIntent.setAction(Constants.ACTION.MAIN_ACTION);
             notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
@@ -94,7 +93,7 @@ public class ForegroundService extends Service {
         } else if (intent.getAction().equals(
                 Constants.ACTION.STOPFOREGROUND_ACTION)) {
             try{
-                Log.i(LOG_TAG, "Received Stop Foreground Intent");
+                Log.i(TAG, "Received Stop Foreground Intent");
                 stopForeground(true);
                 unregisterReceiver(myReceiver);
                 stopSelf();
@@ -115,7 +114,7 @@ public class ForegroundService extends Service {
 
             final Runnable r = new Runnable() {
                 public void run() {
-                    Log.e("TAG1", "I::" + i);
+                    Log.e(TAG, "I::" + i);
 
                     SharedPreferences.Editor editor = getApplicationContext().getSharedPreferences(GlobalApplication.MyPREFERENCES, MODE_PRIVATE).edit();
                     editor.putBoolean(GlobalApplication.mThreadAlive, true);
@@ -130,7 +129,7 @@ public class ForegroundService extends Service {
     }
 
     private void startTimer() {
-        Log.e("TAG1","Service started");
+        Log.e(TAG,"Service started");
         Toast.makeText(getApplicationContext(),"Service started",Toast.LENGTH_SHORT).show();
         IntentFilter filter = new IntentFilter();
         GlobalApplication.isServiceOn=true;
@@ -147,7 +146,7 @@ public class ForegroundService extends Service {
     public void onDestroy() {
         super.onDestroy();
         Toast.makeText(getApplicationContext(),"Service Stopped",Toast.LENGTH_SHORT).show();
-        Log.i(LOG_TAG, "In onDestroy");
+        Log.i(TAG, "In onDestroy");
     }
 
     @Override

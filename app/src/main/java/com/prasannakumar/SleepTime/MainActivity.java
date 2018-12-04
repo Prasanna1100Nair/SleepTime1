@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.foregroundservice;
+package com.prasannakumar.SleepTime;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,9 +33,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.truiton.foregroundservice.Adapters.CustomAdapter;
-import com.truiton.foregroundservice.Classes.Note;
-import com.truiton.foregroundservice.Database.DatabaseHelper;
+import com.prasannakumar.SleepTime.Adapters.CustomAdapter;
+import com.prasannakumar.SleepTime.Classes.Note;
+import com.prasannakumar.SleepTime.Database.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -165,7 +165,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                                         {
                                             sleep.setVisibility(View.VISIBLE);
                                             Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
-                                           // sleep.setText("Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s) );
                                             sleep.setText("Max Sleep time:: " + notesListDate.get(s).getTimeDiff());
 
                                         }
@@ -177,8 +176,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                                         if(maxSec==seconds.get(s))
                                         {
                                             sleep.setVisibility(View.VISIBLE);
-                                           // sleep.setText("Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s) );
-                                            Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
+                                             Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
 
                                             sleep.setText("Max Sleep time:: " + notesListDate.get(s).getTimeDiff());
 
@@ -194,8 +192,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                                     if(maxMin==minutes.get(s))
                                     {
                                         sleep.setVisibility(View.VISIBLE);
-                                       // sleep.setText("Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s) );
-                                        Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
+                                         Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
 
                                         sleep.setText("Max Sleep time:: " + notesListDate.get(s).getTimeDiff());
 
@@ -208,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                                 if(maxHour==hours.get(s))
                                 {
                                     sleep.setVisibility(View.VISIBLE);
-                                   // sleep.setText("Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s) );
                                     Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
                                      sleep.setText("Max Sleep time:: " + notesListDate.get(s).getTimeDiff());
 

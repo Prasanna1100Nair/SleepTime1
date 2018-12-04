@@ -1,4 +1,4 @@
-package com.truiton.foregroundservice;
+package com.prasannakumar.SleepTime;
 
 public class Constants {
 	public interface ACTION {

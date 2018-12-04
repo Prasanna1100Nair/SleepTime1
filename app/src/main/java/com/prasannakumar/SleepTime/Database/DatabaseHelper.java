@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.foregroundservice.Database;
+package com.prasannakumar.SleepTime.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -26,7 +26,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.truiton.foregroundservice.Classes.Note;
+import com.prasannakumar.SleepTime.Classes.Note;
 
 import java.util.ArrayList;
 import java.util.List;

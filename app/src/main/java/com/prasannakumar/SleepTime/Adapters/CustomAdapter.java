@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.foregroundservice.Adapters;
+package com.prasannakumar.SleepTime.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -27,10 +27,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.truiton.foregroundservice.Classes.Note;
+import com.prasannakumar.SleepTime.Classes.Note;
 
 import java.util.ArrayList;
-import com.truiton.foregroundservice.R;
+import com.prasannakumar.SleepTime.R;
 
 
 

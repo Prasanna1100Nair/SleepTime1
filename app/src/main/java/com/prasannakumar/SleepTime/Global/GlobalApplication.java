@@ -18,7 +18,7 @@
  *
  */
 
-package com.truiton.foregroundservice.Global;
+package com.prasannakumar.SleepTime.Global;
 
 import android.app.Application;
 
