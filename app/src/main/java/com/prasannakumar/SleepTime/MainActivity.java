@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     ArrayList<Integer> seconds = new ArrayList<>();
     ArrayList<Integer> SampleSeconds = new ArrayList<>();
     ArrayList<String> date = new ArrayList<>();
-    ArrayList<String> time = new ArrayList<>();
+ 
+
     Button  mRecords;
     private Spinner spinner1;
     ListView listView;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         mRecords.setOnClickListener(this);
         db = new DatabaseHelper(this);
         notesList.addAll(db.getAllNotes());
+        date.clear();
         for (int i = 0; i < notesList.size(); i++) {
 
             if (!date.contains(notesList.get(i).getLock())) {
@@ -118,7 +120,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         hours.clear();
                         minutes.clear();
                         seconds.clear();
-                        time.clear();
+
+
                         for (int i = 0; i < notesListDate.size(); i++) {
                             Log.i(TAG, "getTimeDiff::" + notesListDate.get(i).getTimeDiff());
                             Log.d(TAG, "getLock::" + notesListDate.get(i).getLock_full());
@@ -126,91 +129,122 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                             hours.add(notesListDate.get(i).getHours());
                             minutes.add(notesListDate.get(i).getMinutes());
                             seconds.add(notesListDate.get(i).getSeconds());
-                            time.add(notesListDate.get(i).getTimeDiff());
+
                         }
 
                         int maxHour=Collections.max(hours);
                         int hourCount=Collections.frequency(hours, maxHour);
-                        Log.e(TAG, "maxHour::"+maxHour+"::hourCount::" + hourCount);
+
 
                         if(hourCount>1)//hour
                         {
                             SampleMinutes.clear();
+                            SampleSeconds.clear();
                             for (int s = 0; s < hours.size(); s++) {
+                                Log.d(TAG, "@maxHour@::"+maxHour+"::@hourCount@::" + hours.get(s));
                                 if(maxHour==hours.get(s))
                                 {
                                     SampleMinutes.add(minutes.get(s));
+                                    SampleSeconds.add(seconds.get(s));
                                 }
+
                             }
                             int maxMin=Collections.max(SampleMinutes);
                             int MinuCount=Collections.frequency(minutes, maxMin);
-                            Log.e(TAG, "maxMin::"+maxMin+"::count::" + MinuCount);
-                            if(MinuCount>1)//minute
+                            if(MinuCount>1)
                             {
+                                SampleMinutes.clear();
                                 SampleSeconds.clear();
                                 for (int s = 0; s < minutes.size(); s++) {
-                                    if(maxMin==minutes.get(s))
+
+                                    if(maxHour==hours.get(s)&&maxMin==minutes.get(s))
                                     {
+                                        Log.w(TAG,"1Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
+
                                         SampleSeconds.add(seconds.get(s));
                                     }
                                 }
                                 int maxSec=Collections.max(SampleSeconds);
-                                int MaxCount=Collections.frequency(seconds, maxSec);
-                                Log.e(TAG, "maxSec::"+maxSec+"::count::" + MaxCount);
-
-                                if(MaxCount>1)//seconds
+                                int maxSecCount=Collections.frequency(SampleSeconds, maxSec);
+                                if(maxSecCount>1)
                                 {
+                                    SampleSeconds.clear();
                                     for (int s = 0; s < seconds.size(); s++) {
-                                        if(maxSec==seconds.get(s))
+
+                                        if(maxHour==hours.get(s)&&maxMin==minutes.get(s)&&maxSec==seconds.get(s))
                                         {
+                                            Log.w(TAG,"2Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
+                                            sleep.setText("Total Sleep time is:: "+notesListDate.get(s).getTimeDiff());
                                             sleep.setVisibility(View.VISIBLE);
-                                            Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
-                                            sleep.setText("Max Sleep time:: " + notesListDate.get(s).getTimeDiff());
 
                                         }
+
                                     }
                                 }
                                 else
                                 {
                                     for (int s = 0; s < seconds.size(); s++) {
-                                        if(maxSec==seconds.get(s))
-                                        {
-                                            sleep.setVisibility(View.VISIBLE);
-                                             Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
 
-                                            sleep.setText("Max Sleep time:: " + notesListDate.get(s).getTimeDiff());
+                                        if(maxHour==hours.get(s)&&maxMin==minutes.get(s) && maxSec==seconds.get(s))
+                                        {
+                                            Log.w(TAG,"3Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
+
+                                           sleep.setText("Total Sleep time is:: "+notesListDate.get(s).getTimeDiff());
+                                            sleep.setVisibility(View.VISIBLE);
+                                        }
+
+                                    }
+                                }
+                            }
+                            else //minutes 0
+                            {
+                                int maxSec=Collections.max(SampleSeconds);
+                                int maxSecCount=Collections.frequency(SampleSeconds, maxSec);
+                                if(maxSecCount>1)
+                                {
+                                    SampleSeconds.clear();
+                                    for (int s = 0; s < seconds.size(); s++) {
+                                       // Log.d(TAG,"hours.get(i)::"+hours.get(s)+" maxHour::"+maxHour+" minutes.get(i):: "+minutes.get(s)+" maxMin:: "+maxMin+" seconds.get(i):: "+ seconds.get(s)+" maxSec:: "+maxSec);
+
+                                        if(maxHour==hours.get(s)&&maxMin==minutes.get(s))
+                                        {
+                                            Log.w(TAG,"2Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
+                                            sleep.setText("Total Sleep time is:: "+notesListDate.get(s).getTimeDiff());
+                                            sleep.setVisibility(View.VISIBLE);
 
                                         }
-                                    }
-
-
-                                }
-                            }
-                            else
-                            {
-                                for (int s = 0; s < minutes.size(); s++) {
-                                    if(maxMin==minutes.get(s))
-                                    {
-                                        sleep.setVisibility(View.VISIBLE);
-                                         Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
-
-                                        sleep.setText("Max Sleep time:: " + notesListDate.get(s).getTimeDiff());
 
                                     }
                                 }
+                                else
+                                {
+                                    for (int s = 0; s < seconds.size(); s++) {
+
+                                        if(maxHour==hours.get(s)&&maxMin==minutes.get(s))
+                                        {
+                                            Log.d(TAG,"3Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
+
+                                            sleep.setText("Total Sleep time is:: "+notesListDate.get(s).getTimeDiff());
+                                            sleep.setVisibility(View.VISIBLE);
+                                        }
+
+                                    }
+                                }
+
                             }
+
 
                         }else{
-                            for (int s = 0; s < hours.size(); s++) {
-                                if(maxHour==hours.get(s))
+                            for(int i=0;i<hours.size();i++)
+                            {
+                                if(hours.get(i)==maxHour)
                                 {
-                                    sleep.setVisibility(View.VISIBLE);
-                                    Log.e(TAG,"Max Sleep time:: "+hours.get(s)+":"+minutes.get(s)+":"+seconds.get(s));
-                                     sleep.setText("Max Sleep time:: " + notesListDate.get(s).getTimeDiff());
 
+                                    Log.d(TAG,"Hour::"+maxHour+"minute::"+minutes.get(i)+"second::"+seconds.get(i));
+                                    sleep.setText("Total Sleep time is:: "+notesListDate.get(i).getTimeDiff());
+                                    sleep.setVisibility(View.VISIBLE);
                                 }
                             }
-
                         }
 
                         CustomAdapter mAdapter = new CustomAdapter(notesListDate, this);

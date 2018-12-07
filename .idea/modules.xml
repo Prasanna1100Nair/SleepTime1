@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://C:\Users\Prasannakumar.nair\Downloads\net project\ForegroundService-master\ForegroundService.iml" filepath="C:\Users\Prasannakumar.nair\Downloads\net project\ForegroundService-master\ForegroundService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SleepTime.iml" filepath="$PROJECT_DIR$/SleepTime.iml" />
+      <module fileurl="file://D:\prashant\SleepTime1\SleepTime.iml" filepath="D:\prashant\SleepTime1\SleepTime.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SleepTime1.iml" filepath="$PROJECT_DIR$/SleepTime1.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\prashant\SleepTime1\app\app.iml" filepath="D:\prashant\SleepTime1\app\app.iml" />
     </modules>
   </component>
 </project>
