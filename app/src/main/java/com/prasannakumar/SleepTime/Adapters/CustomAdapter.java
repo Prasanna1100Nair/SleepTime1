@@ -45,6 +45,7 @@ public class CustomAdapter extends ArrayAdapter<Note> implements View.OnClickLis
     Context mContext;
 
     // View lookup cache
+    //hello test messages
     private static class ViewHolder {
         TextView txtName;
         TextView txtType;
@@ -90,20 +91,26 @@ public class CustomAdapter extends ArrayAdapter<Note> implements View.OnClickLis
             viewHolder.txtVersion = (TextView) convertView.findViewById(R.id.interval);
 
 
-            result=convertView;
+           // result=convertView;
 
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
-            result=convertView;
+            //result=convertView;
         }
 
 
         lastPosition = position;
+try{
+    viewHolder.txtName.setText(dataModel.getLock_full());
+    viewHolder.txtType.setText(dataModel.getUnlock_full());
+    viewHolder.txtVersion.setText(dataModel.getTimeDiff());
+}
+catch (Exception e)
+{
+    e.printStackTrace();
+}
 
-        viewHolder.txtName.setText(dataModel.getLock_full());
-        viewHolder.txtType.setText(dataModel.getUnlock_full());
-        viewHolder.txtVersion.setText(dataModel.getTimeDiff());
 
         // Return the completed view to render on screen
         return convertView;
